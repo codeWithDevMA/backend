@@ -17,10 +17,10 @@ exports.post_cards = async (req, res, next) => {
     const cardss = new cards({
       imagesCard: req.file.path,
       NameTeacher: req.body.NameTeacher,
-      Module: req.body.nameModule,
-      spantext1: req.body.nbrCourses,
-      spantext2: req.body.nbrStudent,
-      spantext3: req.body.nbrStar,
+      Module: req.body.NameModule,
+      spantext1: req.body.spantext1,
+      spantext2: req.body.spantext2,
+      spantext3: req.body.spantext3,
     });
     const data = await cardss.save();
     return res.status(202).json({

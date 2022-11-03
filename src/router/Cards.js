@@ -5,14 +5,15 @@ rout.use(express.json());
 const multer = require("multer");
 const checkAuth = require("../middleware/checkAuth");
 const cards = require("../controllers/cards");
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
+var upload = multer({ dest: "./uploads/card" });
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "uploads/");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + "-" + file.originalname);
+//   },
+// });
 // const storageVideo = multer.diskStorage({
 //   destination: function (req, file, cb) {
 //     cb(null, "./public/videoUpload");
@@ -21,14 +22,14 @@ const storage = multer.diskStorage({
 //     cb(null, Date.now() + "-" + file.originalname);
 //   },
 // });
-const fileFilter = (req, file, cb) => {
-  // reject a file
-  if (file.mimetype === "image/jpg" || file.mimetype === "image/PNG") {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
+// const fileFilter = (req, file, cb) => {
+//   // reject a file
+//   if (file.mimetype === "image/jpg" || file.mimetype === "image/PNG") {
+//     cb(null, true);
+//   } else {
+//     cb(null, false);
+//   }
+// };
 // const fileFilterVideo = (req, file, cb) => {
 //   if (file.mimetype === "video/mp4") {
 //     cb(null, true);
@@ -36,13 +37,13 @@ const fileFilter = (req, file, cb) => {
 //     cb({ message: "Unsupported File Format" }, false);
 //   }
 // };
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 61024 * 61024 * 640,
-  },
-  fileFilter: fileFilter,
-});
+// const upload = multer({
+//   storage: storage,
+//   limits: {
+//     fileSize: 61024 * 61024 * 640,
+//   },
+//   fileFilter: fileFilter,
+// });
 // const uploadVideo = multer({
 //   storage: storage,
 //   fileFilter: fileFilterVideo,
