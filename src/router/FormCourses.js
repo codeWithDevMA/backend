@@ -6,7 +6,7 @@ router.get("/", FormCourses.get_FormCourse);
 /*-----------------------------post order -----------------------------*/
 router.post("/", FormCourses.post_FormCourse);
 /*-----------------------------update order-----------------------------*/
-router.patch("/:FormCoursesId", FormCourses.patch_FormCourse);
+router.patch("/:courseId", FormCourses.patch_FormCourse);
 /*----------------------------delete order-----------------------------*/
 router.delete("/:delete", FormCourses.delete_FormCourse);
 module.exports = router;

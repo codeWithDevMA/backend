@@ -48,9 +48,9 @@ rout.post(
   SecondCards.post_secondCards
 );
 /*-----------------------------getting  card-----------------------------*/
-rout.get("/:secondCard_id", SecondCards.get_secondCards);
+rout.get("/:secondCardsId", SecondCards.get_secondCards);
 /*-----------------------------update card-----------------------------*/
-rout.patch("/:secondCard_id", SecondCards.patch_secondCards);
+rout.patch("/:secondCardsId", SecondCards.patch_secondCards);
 /*-----------------------------delete card-----------------------------*/
 rout.delete("/:delete", SecondCards.delete_secondCards);
 module.exports = rout;

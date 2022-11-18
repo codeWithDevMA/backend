@@ -6,7 +6,7 @@ router.get("/", historiques.get_Historique);
 /*-----------------------------post order -----------------------------*/
 router.post("/", historiques.post_Historique);
 /*-----------------------------update order-----------------------------*/
-router.patch("/:historiquesId", historiques.patch_Historique);
+router.patch("/:UserId", historiques.patch_Historique);
 /*----------------------------delete order-----------------------------*/
 router.delete("/:delete", historiques.delete_Historique);
 module.exports = router;

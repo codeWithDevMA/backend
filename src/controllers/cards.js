@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const { defaultConfiguration } = require("../../app");
 const cards = require("../models/Card");
 /*-----------------------------post orders-----------------------------*/
 exports.get_cards = async (req, res, next) => {
   try {
     const data = await cards.find().select("-__v");
+    if (!data) return res.status("data not found");
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ error: err });
@@ -73,8 +73,7 @@ exports.get_cards_id = async (req, res, next) => {
   try {
     const id = req.params.cardsId;
     const data = await cards.findById(id).select("-__v");
-
-    if (doc) {
+    if (data) {
       res.status(200).json(data);
     } else {
       res.status(404).json({ message: "invalid id" });

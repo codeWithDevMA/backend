@@ -14,7 +14,8 @@ exports.Login = async (req, res, next) => {
       process.env.jwt_key,
       { expiresIn: "1h" }
     );
-    return res.status(202).json(token);
+    
+    return res.status(202).json(token,data);
   } catch (error) {
     return res.status(404).send(`${error}`);
   }
