@@ -31,7 +31,7 @@ var uploadsecondcard = multer({ dest: "./uploads/secondcard" });
 // });
 
 /*-----------------------------getting all  card-----------------------------*/
-rout.get("/", SecondCards.get_secondCards_id);
+rout.get("/", SecondCards.get_secondCards);
 /*-----------------------------posting a card-----------------------------*/
 rout.post(
   "/",
@@ -48,7 +48,7 @@ rout.post(
   SecondCards.post_secondCards
 );
 /*-----------------------------getting  card-----------------------------*/
-rout.get("/:secondCardsId", SecondCards.get_secondCards);
+rout.get("/:secondCardsId", SecondCards.get_secondCards_id);
 /*-----------------------------update card-----------------------------*/
 rout.patch("/:secondCardsId", SecondCards.patch_secondCards);
 /*-----------------------------delete card-----------------------------*/
