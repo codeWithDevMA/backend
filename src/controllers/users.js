@@ -10,28 +10,38 @@ exports.Login = async (req, res, next) => {
     const isPassword = await bcrypt.compare(password, data.password);
     if (!isPassword) return res.status(404).send("invalid password ");
     const token = jwt.sign(
-      { message: "valid id", data: data },
+      { message: "valid id", data: email },
       process.env.jwt_key,
       { expiresIn: "1h" }
     );
-    
-    return res.status(202).json(token,data);
+
+    return res.status(202).json({ token: token, data: data });
   } catch (error) {
     return res.status(404).send(`${error}`);
   }
 };
 ///////////////////////////////
 exports.Signup = async (req, res) => {
+  console.log(req.body);
   try {
-    const { email, password } = req.body;
+    const { email, password, name } = req.body;
+
     const isUser = await User.findOne({ email });
     if (isUser) return res.status(202).send("this mail exist");
     const hasPassword = await bcrypt.hash(password, 10);
+    const token = jwt.sign(
+      { message: "valid id", data: email },
+      process.env.jwt_key,
+      { expiresIn: "1h" }
+    );
     const user = new User({
       email: email,
+      name: name,
       password: hasPassword,
+      token: token,
     });
     const data = await user.save();
+
     res.status(202).json({ message: "signup  successfuly ", doc: data });
   } catch (error) {
     return res.status(404).json({ error: error });

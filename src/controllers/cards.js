@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const cards = require("../models/Card");
+
 /*-----------------------------post orders-----------------------------*/
 exports.get_cards = async (req, res, next) => {
   try {
@@ -17,7 +18,7 @@ exports.post_cards = async (req, res, next) => {
     const cardss = new cards({
       imagesCard: req.file.path,
       NameTeacher: req.body.NameTeacher,
-      Module: req.body.NameModule,
+      Module: req.body.Module,
       spantext1: req.body.spantext1,
       spantext2: req.body.spantext2,
       spantext3: req.body.spantext3,

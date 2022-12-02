@@ -28,16 +28,18 @@ app.use("./uploads", express.static("uploads"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+
 app.use((req, res, next) => {
-  res.header("access-control-allow-origin", "*");
+  res.header("Access-Control-Allow-Origin", ["*"]);
   res.header(
-    "access-control-allow-headers",
-    "origin,x-requested-with,content-type,accept,authorisation"
+    "Access-Control-Allow-Headers",
+    "Origin,X-Requested-With,Content-Type,Accept,Authorisation"
   );
-  if (req.method === "options") {
-    res.header("access-control-allow-methods", "PUT,PATCH,GET,POST,DELETE");
-    res.json();
-  }
+  res.header("preflightContinue", "False");
+  // if (req.method === 'OPTIONS') {
+  res.header("Access-Control-Allow-Methods", "PUT,PATCH,GET,POST,DELETE");
+  // res.json();
+  // }
   next();
 });
 

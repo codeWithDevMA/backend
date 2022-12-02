@@ -1,11 +1,10 @@
 const express = require("express");
 const rout = express.Router();
 rout.use(express.json());
-
 const multer = require("multer");
 const checkAuth = require("../middleware/checkAuth");
 const cards = require("../controllers/cards");
-var upload = multer({ dest: "./uploads/card" });
+var upload = multer({ dest: "./uploads/card1" });
 // const storage = multer.diskStorage({
 //   destination: function (req, file, cb) {
 //     cb(null, "./uploads/");
@@ -53,7 +52,7 @@ var upload = multer({ dest: "./uploads/card" });
 /*-----------------------------getting all  card-----------------------------*/
 rout.get("/", cards.get_cards);
 /*-----------------------------posting a card-----------------------------*/
-rout.post("/", upload.single("imagesCard"), cards.post_cards);
+rout.post("/", checkAuth, upload.single("imagesCard"), cards.post_cards);
 /*-----------------------------getting  card-----------------------------*/
 rout.get("/:cardsId", cards.get_cards_id);
 /*-----------------------------update card-----------------------------*/

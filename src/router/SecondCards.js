@@ -50,7 +50,7 @@ rout.post(
 /*-----------------------------getting  card-----------------------------*/
 rout.get("/:secondCardsId", SecondCards.get_secondCards_id);
 /*-----------------------------update card-----------------------------*/
-rout.patch("/:secondCardsId", SecondCards.patch_secondCards);
+rout.patch("/:secondCardsId",checkAuth, SecondCards.patch_secondCards);
 /*-----------------------------delete card-----------------------------*/
-rout.delete("/:delete", SecondCards.delete_secondCards);
+rout.delete("/:delete", checkAuth,SecondCards.delete_secondCards);
 module.exports = rout;
