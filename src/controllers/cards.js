@@ -3,18 +3,14 @@ const cards = require("../models/Card");
 
 /*-----------------------------post orders-----------------------------*/
 exports.get_cards = async (req, res, next) => {
-  try {
-    const data = await cards.find().select("-__v");
-    if (!data) return res.status("data not found");
-    res.status(200).json(data);
-  } catch (error) {
-    res.status(500).json({ error: err });
-  }
+  if (!req.userId) return res.status(406).json({ massege: "Unauthenticated" });
+  const cardss = await cards.find({ user: req.userId });
+  return res.status(200).json(cardss);
 };
 /*-----------------------------get all cards-----------------------------*/
 exports.post_cards = async (req, res, next) => {
   try {
-    console.log(req.body);
+    if (!req.userId) return res.status(406).json({ massege: "Unauthenticated" });
     const cardss = new cards({
       imagesCard: req.file.path,
       NameTeacher: req.body.NameTeacher,
@@ -22,7 +18,9 @@ exports.post_cards = async (req, res, next) => {
       spantext1: req.body.spantext1,
       spantext2: req.body.spantext2,
       spantext3: req.body.spantext3,
+      user: req.userId,
     });
+
     const data = await cardss.save();
     return res.status(202).json({
       message: "Created cards successfuly",

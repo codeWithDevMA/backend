@@ -11,16 +11,15 @@ exports.get_secondCards = async (req, res, next) => {
 };
 /*-----------------------------get all secondCards-----------------------------*/
 exports.post_secondCards = async (req, res) => {
-  console.log(req.files.path);
   try {
     const secondCardss = new secondCards({
-      imagesSecondCard: req.files.imagesSecondCard[0].path,
-      spantext1: req.body.nbrStar,
-      spantext2: req.body.nbrStudent,
-      spantext3: req.body.nbrHour,
-      spantext4: req.body.Lecture,
-      spantext5: req.body.Medium,
-      imagesCardSupervisor: req.files.imagesCardSupervisor[0].path,
+      imagesSecondCard: req.files["imagesSecondCard"][0].path,
+      nbrStar: req.body.nbrStar,
+      nbrStudent: req.body.nbrStudent,
+      nbrHour: req.body.nbrHour,
+      Lecture: req.body.Lecture,
+      Medium: req.body.Medium,
+      imagesCardSupervisor: req.files["imagesCardSupervisor"][0].path,
       nameSupervisor: req.body.nameSupervisor,
       Dollar: req.body.Dollar,
     });

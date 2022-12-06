@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 const card_shcema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   imagesCard: { type: String, required: true },
   NameTeacher: { type: String, required: true },
   Module: { type: String, required: true },

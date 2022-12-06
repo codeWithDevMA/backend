@@ -10,12 +10,14 @@ exports.Login = async (req, res, next) => {
     const isPassword = await bcrypt.compare(password, data.password);
     if (!isPassword) return res.status(404).send("invalid password ");
     const token = jwt.sign(
-      { message: "valid id", data: email },
-      process.env.jwt_key,
+      { message: "valid id", data: email, userId: data._id },
+      process.env.JWT_KEY,
       { expiresIn: "1h" }
     );
+    const up = { _id: data._id, token: token };
+    const user = await User.findByIdAndUpdate(data._id, up, { new: true });
 
-    return res.status(202).json({ token: token, data: data });
+    return res.status(202).json({ token: token, result: user });
   } catch (error) {
     return res.status(404).send(`${error}`);
   }
@@ -31,7 +33,7 @@ exports.Signup = async (req, res) => {
     const hasPassword = await bcrypt.hash(password, 10);
     const token = jwt.sign(
       { message: "valid id", data: email },
-      process.env.jwt_key,
+      process.env.JWT_KEY,
       { expiresIn: "1h" }
     );
     const user = new User({
