@@ -7,5 +7,7 @@ const FormCourse_schema = new mongoose.Schema({
   },
   date: { type: String },
   file: { type: String },
+  video: { type: String },
+  pdf: { type: String },
 });
 module.exports = mongoose.model("FormCourse", FormCourse_schema);

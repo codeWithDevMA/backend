@@ -3,8 +3,30 @@ const rout = express.Router();
 const multer = require("multer");
 const checkAuth = require("../middleware/checkAuth");
 const SecondCards = require("../controllers/secondCards");
-var uploadsecondcard = multer({
-  dest: "./uploads/secondcard/",
+const uploadsecondcard  = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./uploads/secondcard");
+  },
+  filename: function (req, file, cb) {
+    cb(null, new Date().toISOString().replace(/:/g, "-") + file.originalname);
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  // reject a file
+  if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: uploadsecondcard,
+  limits: {
+    fileSize: 1024 * 1024 * 40,
+  },
+  fileFilter: fileFilter,
 });
 
 /*-----------------------------getting all  card-----------------------------*/
@@ -13,7 +35,7 @@ rout.get("/", SecondCards.get_secondCards);
 rout.post(
   "/",
 
-  uploadsecondcard.fields([
+  upload.fields([
     {
       name: "imagesSecondCard",
       maxCount: 1,

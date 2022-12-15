@@ -10,7 +10,5 @@ router.get("/", checkAuth, UserController.GetAll);
 router.delete("/:delete", checkAuth, UserController.DeleteUser);
 /*----------------------------- sign up-----------------------------*/
 router.post("/signin", UserController.Login);
-// hna probleme f signin ReferenceError:
-// prooces is not defined w checkAuth tani probleme
 
 module.exports = router;

@@ -4,7 +4,7 @@ const cards = require("../models/Card");
 /*-----------------------------post orders-----------------------------*/
 exports.get_cards = async (req, res, next) => {
   if (!req.userId) return res.status(406).json({ massege: "Unauthenticated" });
-  const cardss = await cards.find({ user: req.userId });
+  const cardss = await cards.find();// { user: req.userId }
   return res.status(200).json(cardss);
 };
 /*-----------------------------get all cards-----------------------------*/
